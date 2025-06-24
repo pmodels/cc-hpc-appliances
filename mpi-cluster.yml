@@ -1,0 +1,6 @@
+---
+- name: Setup MPI Cluster
+  hosts: all
+  become: yes
+  roles:
+    - common

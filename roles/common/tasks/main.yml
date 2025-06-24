@@ -1,0 +1,15 @@
+---
+- name: Set sys hostname to inventory name
+  ansible.builtin.hostname:
+    name: "{{ inventory_hostname }}"
+
+- name: Add all hosts to /etc/hosts
+  ansible.builtin.lineinfile:
+    path: /etc/hosts
+    regexp: '.*{{ item }}$'
+    line: "{{ hostvars[item].ansible_default_ipv4.address }} {{ item }}"
+    state: present
+    backup: true
+    create: true
+  loop: "{{ groups['all'] }}"
+  when: hostvars[item].ansible_default_ipv4.address is defined
