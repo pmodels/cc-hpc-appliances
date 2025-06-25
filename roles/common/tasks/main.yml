@@ -1,10 +1,10 @@
 ---
 - name: Set sys hostname to inventory name
-  ansible.builtin.hostname:
+  hostname:
     name: "{{ inventory_hostname }}"
 
 - name: Add all hosts to /etc/hosts
-  ansible.builtin.lineinfile:
+  lineinfile:
     path: /etc/hosts
     regexp: '.*{{ item }}$'
     line: "{{ hostvars[item].ansible_default_ipv4.address }} {{ item }}"

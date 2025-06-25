@@ -1,6 +1,12 @@
 ---
 - name: Setup MPI Cluster
   hosts: all
-  become: yes
+  gather_facts: yes
+  become: true
   roles:
     - common
+
+- name: Setup Master Node
+  hosts: master_node
+  roles:
+    - master

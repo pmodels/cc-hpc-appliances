@@ -1,0 +1,28 @@
+---
+- name: Check if ssh key exists for user
+  stat:
+    path: /home/cc/.ssh/id_rsa
+  register: ssh_key
+  become: true
+
+- name: Generate SSH key pair
+  openssh_keypair:
+    path: /home/cc/.ssh/id_rsa
+    type: rsa
+    size: 2048
+    comment: "cc@{{ inventory_hostname }}"
+    owner: cc
+    group: cc
+    mode: '0600'
+  become: true
+  when: not ssh_key.stat.exists
+
+- name: Read the public key
+  slurp:
+    path: /home/cc/.ssh/id_rsa.pub
+  become: true
+  register: ssh_public_key
+
+- name: Decode the public key
+  set_fact:
+    public_key: "{{ ssh_public_key.content | b64decode }}"
