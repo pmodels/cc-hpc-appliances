@@ -27,14 +27,16 @@
   set_fact:
     public_key: "{{ ssh_public_key.content | b64decode }}"
 
-- name: Add worker nodes to known_hosts on master
+- name: Scan for SSH host keys
+  command: ssh-keyscan -H {{ hostvars[item]['ansible_hostname'] }}
+  register: ssh_keyscans
+  loop: "{{ groups['worker_nodes'] }}"
+  changed_when: false
+
+- name: Write the host keys to known hosts in master
   known_hosts:
     path: /home/cc/.ssh/known_hosts
-    name: "{{ item }}"
-    key: "{{ lookup('pipe', 'ssh-keyscan -H ' ~ item) }}"
+    name: "{{ hostvars[item.item]['ansible_hostname'] }}"
     state: present
-    mode: '0644'
-  loop: "{{ groups['worker_nodes'] }}"
-  become: true
-  become_user: cc
-  run_once: true
+    key: "{{ item.stdout }}"
+  loop: "{{ ssh_keyscans.results }}"

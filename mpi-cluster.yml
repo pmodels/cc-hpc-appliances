@@ -1,7 +1,6 @@
 ---
 - name: Setup MPI Cluster
   hosts: all
-  gather_facts: yes
   become: true
   roles:
     - common
