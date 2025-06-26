@@ -10,3 +10,8 @@
   hosts: master_node
   roles:
     - master
+
+- name: Setup Worker Nodes
+  hosts: worker_nodes
+  roles:
+    - worker

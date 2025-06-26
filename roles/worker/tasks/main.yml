@@ -1,0 +1,7 @@
+---
+- name: Add master's public key to authorized_keys
+  authorized_key:
+    user: cc
+    state: present
+    key: "{{ hostvars[groups['master'][0]].public_key }}"
+  become: true

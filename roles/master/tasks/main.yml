@@ -26,3 +26,15 @@
 - name: Decode the public key
   set_fact:
     public_key: "{{ ssh_public_key.content | b64decode }}"
+
+- name: Add worker nodes to known_hosts on master
+  known_hosts:
+    path: /home/cc/.ssh/known_hosts
+    name: "{{ item }}"
+    key: "{{ lookup('pipe', 'ssh-keyscan -H ' ~ item) }}"
+    state: present
+    mode: '0644'
+  loop: "{{ groups['worker_nodes'] }}"
+  become: true
+  become_user: cc
+  run_once: true
