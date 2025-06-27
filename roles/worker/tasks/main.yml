@@ -3,5 +3,5 @@
   authorized_key:
     user: cc
     state: present
-    key: "{{ hostvars[groups['master'][0]].public_key }}"
+    key: "{{ hostvars[groups['master_node'][0]].public_key }}"
   become: true

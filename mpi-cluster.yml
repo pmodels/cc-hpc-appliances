@@ -14,3 +14,9 @@
   hosts: worker_nodes
   roles:
     - worker
+
+- name: Setup Extra Spack requirements
+  hosts: all
+  become: true
+  roles:
+    - spack

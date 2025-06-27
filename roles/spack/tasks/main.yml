@@ -1,0 +1,10 @@
+---
+- name: Install Spack packages
+  command: "{{ spack_cmd }} install {{ item }}"
+  loop: "{{ spack_packages }}"
+  register: spack_installed_packages
+  failed_when: "'failed' in spack_installed_packages.stderr or spack_installed_packages.rc != 0"
+  changed_when: "'Installing' in spack_installed_packages.stdout"
+
+- name: Regenerate the module(lmod) tree
+  command: "{{ spack_cmd }} module lmod refresh --delete-tree -y"

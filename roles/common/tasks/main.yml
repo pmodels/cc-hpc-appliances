@@ -13,3 +13,15 @@
     create: true
   loop: "{{ groups['all'] }}"
   when: hostvars[item].ansible_default_ipv4.address is defined
+
+- name: Add private ip addresses to trusted zone
+  ansible.posix.firewalld:
+    source: "{{ item }}"
+    zone: trusted
+    permanent: true
+    state: enabled
+    immediate: yes
+  loop:
+    - 10.0.0.0/8
+    - 172.16.0.0/12
+    - 192.168.0.0/16
