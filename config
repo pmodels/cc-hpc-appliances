@@ -3,3 +3,4 @@ Host *
     IdentityFile /work/.ssh/id_rsa
     StrictHostKeyChecking no
     UserKnownHostsFile /dev/null
+    ConnectTimeout 60
