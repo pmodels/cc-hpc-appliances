@@ -4,3 +4,5 @@ Host *
     StrictHostKeyChecking no
     UserKnownHostsFile /dev/null
     ConnectTimeout 60
+    ServerAliveInterval 15
+    ServerAliveCountMax 3
