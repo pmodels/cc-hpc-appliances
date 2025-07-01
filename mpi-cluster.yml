@@ -1,21 +1,21 @@
 ---
-- name: Setup MPI Cluster
+- name: Set Common Configuration
   hosts: all
   become: true
   roles:
     - common
 
-- name: Setup Master Node
+- name: Configure Master Node
   hosts: master_node
   roles:
     - master
 
-- name: Setup Worker Nodes
+- name: Configure Worker Nodes
   hosts: worker_nodes
   roles:
     - worker
 
-- name: Setup Extra Spack requirements
+- name: Install Spack Dependencies
   hosts: all
   become: true
   roles:
