@@ -1,4 +1,13 @@
 ---
+- name: Install new compilers
+  shell: |
+    {{ spack_cmd }} install {{ item }}
+    {{ spack_cmd }} compiler find
+  loop: "{{ spack_compilers }}"
+  register: spack_installed_compilers
+  changed_when: "'Installing' in spack_installed_compilers.stdout"
+  failed_when: "'failed' in spack_installed_compilers.stderr or spack_installed_compilers.rc != 0"
+
 - name: Install Spack packages
   command: "{{ spack_cmd }} install {{ item }}"
   loop: "{{ spack_packages }}"
@@ -8,3 +17,4 @@
 
 - name: Regenerate the module(lmod) tree
   command: "{{ spack_cmd }} module lmod refresh --delete-tree -y"
+  when: spack_installed_compilers.changed or spack_installed_packages.changed

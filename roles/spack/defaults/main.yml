@@ -2,3 +2,4 @@
 spack_install_dir: "/opt/spack"
 spack_cmd: "{{ spack_install_dir }}/bin/spack"
 spack_packages: []
+spack_compilers: []
