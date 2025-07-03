@@ -14,7 +14,13 @@
   loop: "{{ groups['all'] }}"
   when: hostvars[item].ansible_default_ipv4.address is defined
 
-- name: Add private ip addresses to trusted zone
+- name: Check firewalld status
+  ansible.builtin.systemd:
+    name: firewalld
+  check_mode: yes
+  register: firewalld_status
+
+- name: Add private IP addresses to trusted zone
   ansible.posix.firewalld:
     source: "{{ item }}"
     zone: trusted
@@ -25,3 +31,4 @@
     - 10.0.0.0/8
     - 172.16.0.0/12
     - 192.168.0.0/16
+  when: firewalld_status.status.ActiveState == 'active'
