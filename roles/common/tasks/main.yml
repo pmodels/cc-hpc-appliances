@@ -32,3 +32,27 @@
     - 172.16.0.0/12
     - 192.168.0.0/16
   when: firewalld_status.status.ActiveState == 'active'
+
+- name: Create mounting directories if not already present
+  file:
+    path: "{{ item.mount }}"
+    state: directory
+    mode: '0755'
+  loop: "{{ nfs_shares }}"
+
+- name: Mount NFS share instances
+  mount:
+    src: "{{ item.export }}"
+    path: "{{ item.mount }}"
+    fstype: nfs
+    opts: defaults
+    state: mounted
+  loop: "{{ nfs_shares }}"
+
+- name: Update /etc/fstab
+  lineinfile:
+    path: /etc/fstab
+    regexp: '^.*{{ item.mount }}.*$'
+    line: "{{ item.export }} {{ item.mount }} nfs defaults 0 0"
+    state: present
+  loop: "{{ nfs_shares }}"
