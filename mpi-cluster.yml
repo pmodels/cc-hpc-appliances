@@ -17,6 +17,5 @@
 
 - name: Install Spack Dependencies
   hosts: all
-  become: true
   roles:
     - spack
