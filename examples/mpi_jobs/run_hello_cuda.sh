@@ -7,4 +7,4 @@ ALL_HOSTNAMES="$MASTER_HOSTNAME,$WORKER_HOSTNAMES"
 module load mpich
 mkdir -p /mnt/share1/cc
 nvcc -ccbin mpicxx -o /mnt/share1/cc/hello /home/cc/hello.cu
-mpirun --host "$ALL_HOSTNAMES" /mnt/share1/cc/hello
+mpirun -ppn 1 --host "$ALL_HOSTNAMES" /mnt/share1/cc/hello
