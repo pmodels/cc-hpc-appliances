@@ -40,3 +40,26 @@
     state: present
     key: "{{ item.stdout }}"
   loop: "{{ ssh_keyscans.results }}"
+
+- name: Add all hosts to MPI hostfile
+  lineinfile:
+    path: /etc/mpi/hostfile
+    regexp: '^{{ item }}(\s|$)'
+    line: "{{ item }}"
+    state: present
+    backup: true
+    create: true
+    mode: '0666'
+  loop: "{{ groups['all'] }}"
+  become: true
+
+- name: Update mpi_config to include /etc/mpi/hostfile
+  lineinfile:
+    path: /etc/profile.d/mpi_config.sh
+    regexp: '^export HYDRA_HOST_FILE='
+    line: 'export HYDRA_HOST_FILE=/etc/mpi/hostfile'
+    backup: true
+    create: yes
+    state: present
+    mode: '0755'
+  become: true
