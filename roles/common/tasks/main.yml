@@ -41,3 +41,11 @@
     opts: defaults
     state: mounted
   loop: "{{ nfs_shares }}"
+
+- name: Ensure correct permissions after mount
+  file:
+    path: "{{ item.mount }}"
+    owner: root
+    group: spackusers
+    mode: '2775'
+  loop: "{{ nfs_shares }}"
