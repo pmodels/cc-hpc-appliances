@@ -5,6 +5,5 @@ WORKER_HOSTNAMES=$2
 ALL_HOSTNAMES="$MASTER_HOSTNAME,$WORKER_HOSTNAMES"
 
 module load mpich
-mkdir -p /mnt/share1/cc
-mpicc /home/cc/hello.c -o /mnt/share1/cc/hello
+mpicc /home/cc/hello.c -o /mnt/share1/hello
 mpirun -ppn 1 --hostfile /etc/mpi/hostfile /mnt/share1/hello
