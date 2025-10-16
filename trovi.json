@@ -15,7 +15,7 @@
                 }
             ],
             "datePublished": "2025-07-23T17:00:20+00:00",
-            "description": "This artifact sets up a ready-to-use HPC cluster in the cloud with a master-worker setup. All nodes come pre-installed with MPICH, OpenMPI, Spack, and Lmod (Lua modules) for running and managing MPI-based applications. Users can optionally enable a shared NFS directory for seamless data access across nodes. Example Jupyter notebooks are included to help users get started.",
+            "description": "This artifact sets up a ready-to-use HPC cluster in the cloud with a manager-worker setup. All nodes come pre-installed with MPICH, OpenMPI, Spack, and Lmod (Lua modules) for running and managing MPI-based applications. Users can optionally enable a shared NFS directory for seamless data access across nodes. Example Jupyter notebooks are included to help users get started.",
             "disambiguatingDescription": "HPC cluster setup using MPI, Spack, and Ansible on Ubuntu 22.04",
             "keywords": "appliance,example",
             "name": "MPI and Spack based HPC Cluster"
