@@ -50,7 +50,7 @@
     backup: true
     create: true
     mode: '0666'
-  loop: "{{ groups['all'] }}"
+  loop: "{{ groups['worker_nodes'] }}"
   become: true
 
 - name: Update mpi_config to include /etc/mpi/hostfile
