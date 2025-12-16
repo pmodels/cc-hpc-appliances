@@ -2,13 +2,15 @@
 
 This repo contains the latest version which is available in the Trovi Artifact titled "[MPI and Spack Based HPC Cluster](https://trovi.chameleoncloud.org/dashboard/artifacts/7424a8dc-0688-4383-9d67-1e40ff37de17)".
 
-The Trovi artifact provides a reproducible, ready-to-use HPC cluster on the [Chameleon Cloud](https://chameleoncloud.org/), with automated setup of nodes for immediate execution of MPI-based tasks/applications.
+The Trovi artifact provides a reproducible, ready-to-use HPC cluster on the [Chameleon Cloud](https://chameleoncloud.org/), 
+with automated setup of nodes for immediate execution of MPI-based tasks/applications.
 
 ## Introduction
 
 Message Passing Interface (MPI) is the backbone of high-performance computing (HPC), enabling efficient scaling across thousands of processing cores.
 
-This project provides a reproducible MPI setup on the Chameleon testbed. It deploys an MPI cluster on a configurable number of nodes. Users login to a "main" node. From there, MPI applications can be built and run across the entire cluster.
+This project provides a reproducible MPI setup on the Chameleon testbed. It deploys an MPI cluster on a configurable number of nodes. Users login to a "main" node. 
+From there, MPI applications can be built and run across the entire cluster.
 
 ## Features
 
